@@ -21,7 +21,7 @@ function Game() {
   return (
     <>
       {/* <PreviousGuesses guesses={guesses} /> */}
-      <Guess guesses={guesses} />
+      <Guess guesses={guesses} answer={answer} />
       <Input
         guessInput={guessInput}
         setGuessInput={setGuessInput}
