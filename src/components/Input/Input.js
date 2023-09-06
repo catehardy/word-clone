@@ -1,23 +1,53 @@
 import React from "react";
+import { NUM_OF_GUESSES_ALLOWED } from "../../constants";
 
-function handleSubmit(guessInput, setGuessInput, event, guesses, setGuesses) {
+function handleSubmit(
+  guessInput,
+  setGuessInput,
+  event,
+  guesses,
+  setGuesses,
+  setGameStatus,
+  answer
+) {
   event.preventDefault();
   if (guessInput.length < 5) {
-    alert('Input must be at least 5 characters');
+    alert("Input must be at least 5 characters");
     return;
   }
+  if (guessInput === answer) {
+    setGameStatus("won");
+  };
+  if (guesses.length >= NUM_OF_GUESSES_ALLOWED -1) {
+    setGameStatus("lost");
+  };
   console.log("Guess:", guessInput);
   setGuessInput("");
   setGuesses([...guesses, guessInput]);
 }
 
-function Input({ guessInput, setGuessInput, guesses, setGuesses }) {
+function Input({
+  guessInput,
+  setGuessInput,
+  guesses,
+  setGuesses,
+  setGameStatus,
+  answer,
+}) {
   return (
     <>
       <form
         className="guess-input-wrapper"
         onSubmit={(event) =>
-          handleSubmit(guessInput, setGuessInput, event, guesses, setGuesses)
+          handleSubmit(
+            guessInput,
+            setGuessInput,
+            event,
+            guesses,
+            setGuesses,
+            setGameStatus,
+            answer
+          )
         }
       >
         <label htmlFor="guess-input">Enter guess:</label>

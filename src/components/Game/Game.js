@@ -5,9 +5,7 @@ import React from "react";
 import { sample } from "../../utils";
 import { WORDS } from "../../data";
 import Input from "../Input";
-// import PreviousGuesses from "../PreviousGuesses/previous-guesses";
 import Guess from "../Guess/Guess";
-
 
 // Pick a random word on every pageload.
 const answer = sample(WORDS);
@@ -17,23 +15,37 @@ console.info({ answer });
 function Game() {
   const [guessInput, setGuessInput] = React.useState("");
   const [guesses, setGuesses] = React.useState([]);
+  const [gameStatus, setGameStatus] = React.useState("current");
+  const numberOfGuesses = guesses.length
 
   return (
     <>
-      {/* <PreviousGuesses guesses={guesses} /> */}
       <Guess guesses={guesses} answer={answer} />
       <Input
         guessInput={guessInput}
         setGuessInput={setGuessInput}
         guesses={guesses}
         setGuesses={setGuesses}
+        setGameStatus={setGameStatus}
+        answer={answer}
       />
+      {gameStatus === "won" && (
+        <div className="happy banner">
+          <p>
+            <strong>Congratulations!</strong> Got it in
+            <strong>{` ${numberOfGuesses} ${numberOfGuesses === 1 ? "guess" : "guesses"}`}</strong>.
+          </p>
+        </div>
+      )}
+      {gameStatus === "lost" && (
+        <div className="sad banner">
+          <p>
+            Sorry, the correct answer is <strong>{answer}</strong>.
+          </p>
+        </div>
+      )}
     </>
   );
 }
 
 export default Game;
-
-// Idea: I could set number of rows for the Guess component as 6-guesses (these are the previous guesses)
-// then I'd display the previous guesses in a grid by mapping over each guess, and display an empty grid
-// for however many of the 6 remaining guesses are left.
