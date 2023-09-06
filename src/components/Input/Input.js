@@ -27,13 +27,13 @@ function handleSubmit(
 }
 
 function Input({
-  guessInput,
-  setGuessInput,
   guesses,
   setGuesses,
   setGameStatus,
   answer,
 }) {
+  const [guessInput, setGuessInput] = React.useState("");
+
   return (
     <>
       <form
