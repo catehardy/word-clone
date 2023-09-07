@@ -18,17 +18,14 @@ function handleSubmit(
     alert("Input must be at least 5 characters");
     return;
   }
+  const nextGuesses = [...guesses, guessInput];
+  setGuesses(nextGuesses);
   if (guessInput === answer) {
     setGameStatus("won");
-    setGuessInput("");
-    setGuesses([...guesses, guessInput]);
-    return;
-  }
-  if (guesses.length >= NUM_OF_GUESSES_ALLOWED - 1) {
+  } else if (nextGuesses.length >= NUM_OF_GUESSES_ALLOWED) {
     setGameStatus("lost");
   }
   setGuessInput("");
-  setGuesses([...guesses, guessInput]);
 }
 
 function Input({ guesses, setGuesses, gameStatus, setGameStatus, answer }) {
