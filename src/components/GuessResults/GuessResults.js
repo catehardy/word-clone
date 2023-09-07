@@ -1,9 +1,12 @@
+// libs
 import React from "react";
+
+// local
 import { range } from "../../utils";
 import { NUM_OF_GUESSES_ALLOWED } from "../../constants";
 import { checkGuess } from "../../game-helpers";
 
-function Guess({guesses, answer}) {
+function GuessResults({guesses, answer}) {
   let numRows = NUM_OF_GUESSES_ALLOWED;
   let numCols = 5;
 
@@ -32,4 +35,4 @@ function Guess({guesses, answer}) {
   );
 }
 
-export default Guess;
+export default GuessResults;

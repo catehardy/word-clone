@@ -1,4 +1,7 @@
+// libs
 import React from "react";
+
+// local
 import { NUM_OF_GUESSES_ALLOWED } from "../../constants";
 
 function handleSubmit(
@@ -17,21 +20,18 @@ function handleSubmit(
   }
   if (guessInput === answer) {
     setGameStatus("won");
-  };
-  if (guesses.length >= NUM_OF_GUESSES_ALLOWED -1) {
+    setGuessInput("");
+    setGuesses([...guesses, guessInput]);
+    return;
+  }
+  if (guesses.length >= NUM_OF_GUESSES_ALLOWED - 1) {
     setGameStatus("lost");
-  };
-  console.log("Guess:", guessInput);
+  }
   setGuessInput("");
   setGuesses([...guesses, guessInput]);
 }
 
-function Input({
-  guesses,
-  setGuesses,
-  setGameStatus,
-  answer,
-}) {
+function Input({ guesses, setGuesses, setGameStatus, answer }) {
   const [guessInput, setGuessInput] = React.useState("");
 
   return (
@@ -56,6 +56,7 @@ function Input({
           type="text"
           value={guessInput}
           maxLength={5}
+          minLength={5}
           required
           onChange={(event) => {
             setGuessInput(event.target.value.toUpperCase());
