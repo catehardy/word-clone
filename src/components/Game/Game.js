@@ -14,7 +14,7 @@ console.info({ answer });
 
 function Game() {
   const [guesses, setGuesses] = React.useState([]);
-  const [gameStatus, setGameStatus] = React.useState("");
+  const [gameStatus, setGameStatus] = React.useState("current");
   const numberOfGuesses = guesses.length
 
   return (
@@ -23,6 +23,7 @@ function Game() {
       <Input
         guesses={guesses}
         setGuesses={setGuesses}
+        gameStatus={gameStatus}
         setGameStatus={setGameStatus}
         answer={answer}
       />

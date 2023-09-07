@@ -31,7 +31,7 @@ function handleSubmit(
   setGuesses([...guesses, guessInput]);
 }
 
-function Input({ guesses, setGuesses, setGameStatus, answer }) {
+function Input({ guesses, setGuesses, gameStatus, setGameStatus, answer }) {
   const [guessInput, setGuessInput] = React.useState("");
 
   return (
@@ -61,6 +61,7 @@ function Input({ guesses, setGuesses, setGameStatus, answer }) {
           onChange={(event) => {
             setGuessInput(event.target.value.toUpperCase());
           }}
+          disabled={gameStatus !== "current"}
         />
       </form>
     </>
